@@ -1,0 +1,27 @@
+1. SSH 접속
+ssh tony@<PUBLIC IP>
+
+2. command
+ls
+
+3. command and option
+ls -a
+
+4. command and argument
+ls /tmp
+
+5. command and option, argument
+ls -a /tmp
+
+6. date and time
+date
+
+7. clear screen
+clear
+
+8. commands manual
+man clear
+
+9. change password
+passwd
+

@@ -1,0 +1,28 @@
+1. 출력 리디렉션
+ls /abc 2> ls.err
+cat ls.err
+
+2. 프로세스 목록
+ps 
+ps -f
+
+ps -ef
+ps -fu tony
+
+3. 프로세스 종료
+kill -9 PID
+pkill nginx
+
+4. 포그라운드 및 백그라운드 작업
+sleep 100
+sleep 100 &
+
+5. 작업 전환
+jobs
+
+fg %2
+
+6. 특정 프로세스 정보 검색
+ps -ef | grep bash
+pgrep -x bash
+pgrep -l bash

@@ -1,0 +1,51 @@
+1. 기본 셸 확인
+grep tony /etc/passwd
+
+2. 기본 셸 변경
+chsh -s /bin/sh tony
+
+3. 다시 기본 셸 확인
+grep tony /etc/passwd
+
+4. 기본 셸 원래대로
+chsh -s /bin/bash tony
+
+5. 출력 명령
+echo linux
+echo "linux ubuntu"
+
+printf linux
+printf "linux ubuntu \n"
+printf "%d + %d = %d\n" 10 10 20
+
+6. 명령 체인
+date; ls -a; pwd
+
+7. 파이프
+ls -al /etc | more
+
+8. 리터럴
+echo '$SHELL'
+echo "$SHELL"
+
+9. 인용 부호와 억음악센트 기호
+echo "Today is `date`"
+
+ls /usr/bin/`uname -m`
+
+10. 출력 재지정
+ls -l > res
+ls -l >> res
+cat < res
+
+11. 변수 정의
+SOME=text
+echo $SOME
+
+12. 별칭
+alias
+alias hn=hostname
+alias hs=history
+
+13. 히스토리
+history

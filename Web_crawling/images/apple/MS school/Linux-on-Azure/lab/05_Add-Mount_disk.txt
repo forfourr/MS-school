@@ -1,0 +1,22 @@
+1. VM에 연결된 디스크 확인
+lsblk -o NAME,HCTL,SIZE,MOUNTPOINT | grep -i "sd"
+
+2. 디스크 포맷 및 검증
+sudo parted /dev/sdc --script mklabel gpt mkpart xfspart xfs 0% 100%
+sudo mkfs.xfs /dev/sdc1
+sudo partprobe /dev/sdc1
+
+3. 디스크 마운트
+sudo mkdir /datadrive
+sudo mount /dev/sdc1 /datadrive
+df -h
+
+4. 부팅 후 디스크 유지를 위해 /etc/fstab 파일에 추가
+4.1 새 드라이브의 UUID확인
+sudo blkid
+
+4.2 텍스트 편집기에서 /etc/fstab 파일 열기 
+sudo nano /etc/fstab
+
+4.3 fstab 파일 마지막에 추가할 내용 예시
+UUID=33333333-3b3b-3c3c-3d3d-3e3e3e3e3e3e   /datadrive   xfs   defaults,nofail   1   2

@@ -1,0 +1,47 @@
+1. 시작
+vi test.text
+vi
+
+2. 종료
+q
+q!
+w [파일명]
+wq
+wq!
+
+3. 입력 모드
+i, a, o, I, A, o
+
+4. 명령 모드
+ESC
+
+5. 특정 행 이동
+G
+2G
+:3
+:$
+
+6. 내용 편집
+vi test.txt
+ubuntu editor vi study
+I like linu ubuntu linux
+
+문자 삭제
+단어 삭제
+행 끝까지 삭제
+
+7. 복사, 잘라내기, 붙이기
+두 행 복사: 2yy
+커서 행 아래 붙이기: p
+마지막 행 잘라내기: dd
+마지막 행 위로 붙이기: P
+
+8. 검색
+검색 전환: /
+검색 키워드: ubuntu
+다음 키워드: n
+
+
+
+
+

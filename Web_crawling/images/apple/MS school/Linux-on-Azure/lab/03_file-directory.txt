@@ -1,0 +1,50 @@
+1. 파일의 종류
+file .profile
+file .ssh
+file /bin/bash
+
+2. 현재 디렉터리 확인
+pwd
+
+3. 파일 속성
+ls -l /etc/hosts
+
+4. 접근 권한 변경
+chmod u+x res
+chmod 666 res
+
+5. 디렉터리 생성
+mkdir temp
+ls temp
+mkdir tmp1 tmp2 tmp3
+
+6. 디렉터리 삭제
+rmdir tmp*
+
+7. 파일 내용 연속 출력
+cat /etc/hosts
+cat -n /etc/hosts
+
+8. 파일 화면 단위 출력
+more /etc/services
+
+9. 파일 복사
+cp /etc/hosts /etc/services temp
+
+10. 파일 이동
+mv temp/hosts temp/newhosts
+
+11. 파일 삭제
+rm temp/newhosts
+rm -r temp
+
+12. 빈 파일 만들기
+touch test
+
+13. 파일 내용 검색
+cp /etc/services data
+grep NNTP data
+grep -n NNTP data
+
+14. 파일 찾기
+find /usr/bin -name ls
