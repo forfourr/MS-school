@@ -82,29 +82,37 @@ def evaluate(model, device, test_loader):
 
 ##########
 # 앙상블된 모델 예측 합침
-def combine_predictions(predictions):
-    combined = torch.cat(predictions, dim=0)
-    _, predicted_labels = torch.max(combined, 1)
-    return predicted_labels
+def ensemble_predict(models, device, test_loader):
+    predictions = []
+    with torch.no_grad():
+        for data, _ in test_loader:
+            data = data.to(device)
+            outputs = []
+            model.eval()
+            for model in models:
+                output = model(data)
+                outputs.append(output)
+
+            ensemble_output = torch.stack(outputs).mean(dim=0)
+            _, predicted = torch.max(ensemble_output, 1)
+            predictions.extend(predicted.cpu().numpy())
+    return predictions
 
 
 ############
 # main
 if __name__ == '__main__':
-    for epoch in range(1,2):
+    models = []
+    for epoch in range(1,6):
         print(f"Training Model {epoch}")
-        ensemble_model = ensemble_model.to(device)
-        train(ensemble_model, device, train_loader, optimizer, criterion)
 
+        model = model.to(device)
+        train(model, device, train_loader, optimizer, criterion)
 
-        predictions = []
-
-        with torch.no_grad():
-            for data,_ in test_loader:
-                data = data.to(device)
-                output = ensemble_model(data)
-                predictions.append(output)
+        accuracy = evaluate(model, device, test_loader)
+        print(f"Model {epoch} Accuracy: {accuracy:.2f}")
+        models.append(model)
         
-        combine_predictions = combine_predictions(predictions)
-        accuracy = accuracy_score(test_dataset.targets, combine_predictions.cpu().numpy())
-        print(f"Model {epoch}, Acuuracy: {accuracy:.2f}")
+    ensemble_predictions = ensemble_predict(models, device, test_loader)
+    ensemble_accuracy = accuracy_score(test_dataset.targets,ensemble_predictions)
+    print(f"Ensemble Acuuracy: {accuracy:.2f}")
