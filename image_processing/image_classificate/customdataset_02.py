@@ -11,14 +11,17 @@ class CustomDataset(Dataset):
         self.data_dir = glob.glob(os.path.join(data_dir,"*","*.png"))
         self.transform = transform
         #dict
-        self.label_dict = {'Mel':0,
-                           "STFT":1,
-                           "waveshow":2}
+        self.label_dict = {"Abstract" : 0 , "Cubist" : 1, "Expressionist" : 2,
+                   "Impressionist" : 3, "Landscape" : 4, "Pop Art":5,
+                   "Portrait" : 6, "Realist" :7, "Still Life" : 8,
+                   "Surrealist" : 9}
 
     def __getitem__(self, index):
         img_path =self.data_dir[index]
         image = Image.open(img_path)
+        image = image.convert("RGB")
         label_name = img_path.split('\\')[1]
+        print(label_name)
         label = self.label_dict[label_name]
         if self.transform is not None :
             image = self.transform(image)
@@ -28,4 +31,6 @@ class CustomDataset(Dataset):
     def __len__(self):
         return len(self.data_dir)
     
-test = CustomDataset("C:/Users/iiile/Vscode_jupyter/MS_school/MS-school/image_processing/image_classificate/data/train",transform=None)
+data_path = 'C:/Users/labadmin/MS/MS-school/image_processing/image_classificate/data'
+
+test = CustomDataset(f"{data_path}/train",transform=None)
