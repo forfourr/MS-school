@@ -2,13 +2,17 @@ import torch
 import torch.nn as nn
 import torchvision
 from torchvision.models import vgg11, VGG11_Weights
-
- 
+from torch.nn import CrossEntropyLoss
+from tqdm import tqdm
 import torchvision.transforms as transforms
 from torch.utils.data import DataLoader
 from customdataset_02 import CustomDataset
 import torch.optim as optim
 from torch.optim import AdamW
+import os
+os.environ['CUDA_LAUNCH_BLOCKING'] = "1"
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+
 
 def train(model, train_loader,val_loader,epochs,device, optimizer, criterion):
     best_val_acc = 0.0
@@ -24,6 +28,10 @@ def train(model, train_loader,val_loader,epochs,device, optimizer, criterion):
         model.train()
         train_loss = 0.0
         train_acc = 0.0
+        # tqdm
+        train_loader_iter = tqdm(train_loader,
+                                 desc=f"Epoch {epoch +1}/{epochs}", leave=False)
+        
         for i, (data, target) in enumerate(train_loader):
             data, target = data.to(device), target.to(device)
 
@@ -40,6 +48,7 @@ def train(model, train_loader,val_loader,epochs,device, optimizer, criterion):
             # loss
             train_loss += loss.item()
             if i %10 ==9:
+                train_loader_iter.set_postfix({"Loss" : loss.item()})
                 print(f"Epoch: [{epoch+1}/{epochs}], Loss: {loss.item()}")
 
         
@@ -66,15 +75,22 @@ def train(model, train_loader,val_loader,epochs,device, optimizer, criterion):
         val_losses.append(val_loss/len(train_loader))
         val_accs.append(val_acc/len(val_loader.dataset))
 
-        ## save model
-        if val_acc > best_val_acc:
-            torch.save(model.state_dict(), 'model.pth')
+        # save the model with the best val acc
+        if val_acc > best_val_acc :
+            torch.save(model.state_dict(), '02_ex_best.pt')
+            best_val_acc = val_acc
 
+        print(f"Epoch [{epoch + 1}/{epochs}], "
+              f"Train Loss : {train_loss :.4f}, "
+              f"Train Acc : {train_acc:.4f}, "
+              f"Val Loss : {val_loss :.4f},"
+              f" Val Acc : {val_acc :.4f}  ")
     return model, train_losses, val_losses, train_accs, val_accs
 
 
 def main():
     DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    print(DEVICE)
     #data_path ="C:/Users/iiile/Vscode_jupyter/MS_school/MS-school/image_processing/image_classificate/data"
     data_path = 'C:/Users/labadmin/MS/MS-school/image_processing/image_classificate/data'
     #model = vgg11(pretrained=True)
@@ -100,8 +116,8 @@ def main():
     ])
 
     ## dataset
-    train_dataset = CustomDataset(f'{data_path}/train',transform=train_transfrom)
-    val_dataset = CustomDataset(f'{data_path}/val',transform=val_transfrom)
+    train_dataset = CustomDataset(f'{data_path}/paintings/train',transform=train_transfrom)
+    val_dataset = CustomDataset(f'{data_path}/paintings/val',transform=val_transfrom)
     ## dataloader
     train_loader = DataLoader(train_dataset, batch_size=64, num_workers=4, pin_memory=True, shuffle=True)
     val_loader = DataLoader(val_dataset, batch_size=64, num_workers=4, pin_memory=True, shuffle=False)
@@ -120,7 +136,7 @@ def main():
 
 
     ## loss, optim
-    criterion = nn.CrossEntropyLoss().to(DEVICE)
+    criterion = CrossEntropyLoss().to(DEVICE)
     optimizer = optim.AdamW(model.parameters(),lr= 0.001, weight_decay=1e-2 )
 
     train(model, train_loader,val_loader,epochs=20,device=DEVICE, optimizer=optimizer, criterion=criterion)

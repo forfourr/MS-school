@@ -21,7 +21,6 @@ class CustomDataset(Dataset):
         image = Image.open(img_path)
         image = image.convert("RGB")
         label_name = img_path.split('\\')[1]
-        print(label_name)
         label = self.label_dict[label_name]
         if self.transform is not None :
             image = self.transform(image)
@@ -33,4 +32,4 @@ class CustomDataset(Dataset):
     
 data_path = 'C:/Users/labadmin/MS/MS-school/image_processing/image_classificate/data'
 
-test = CustomDataset(f"{data_path}/train",transform=None)
+test = CustomDataset(f"{data_path}/paintings/train",transform=None)
