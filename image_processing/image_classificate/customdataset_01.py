@@ -30,4 +30,4 @@ class CustomDataset(Dataset):
         return len(self.data_dir)
     
 data_path = 'C:/Users/labadmin/MS/MS-school/image_processing/image_classificate/data'
-test = CustomDataset(f"{data_path}/train",transform=None)
+test = CustomDataset(f"{data_path}/sound/train",transform=None)

@@ -37,25 +37,25 @@ mel_train_data, mel_val_data = train_test_split(file_path_03, test_size=0.2)
 
 
 for wave_train_path in wave_train_data:
-    os.makedirs(f"{data_path}/train/waveshow", exist_ok=True)
-    shutil.move(wave_train_path, f"{data_path}/train/waveshow")
+    os.makedirs(f"{data_path}/sound/train/waveshow", exist_ok=True)
+    shutil.move(wave_train_path, f"{data_path}/sound/train/waveshow")
 for wave_val_path in wave_val_data:
-    os.makedirs(f"{data_path}/val/waveshow", exist_ok=True)
-    shutil.move(wave_val_path,f"{data_path}/val/waveshow")
+    os.makedirs(f"{data_path}/sound/val/waveshow", exist_ok=True)
+    shutil.move(wave_val_path,f"{data_path}/sound/val/waveshow")
 
 for stft_train_path in stft_train_data:
-    os.makedirs(f"{data_path}/train/STFT", exist_ok=True)
-    shutil.move(stft_train_path, f"{data_path}/train/STFT")
+    os.makedirs(f"{data_path}/sound/train/STFT", exist_ok=True)
+    shutil.move(stft_train_path, f"{data_path}/sound/train/STFT")
 for stft_val_path in stft_val_data:
-    os.makedirs(f"{data_path}/val/STFT", exist_ok=True)
-    shutil.move(stft_val_path,f"{data_path}/val/STFT")
+    os.makedirs(f"{data_path}/sound/val/STFT", exist_ok=True)
+    shutil.move(stft_val_path,f"{data_path}/sound/val/STFT")
 
 
 for mel_train_path in mel_train_data:
-    os.makedirs(f"{data_path}/train/Mel", exist_ok=True)
-    shutil.move(mel_train_path, f"{data_path}/train/Mel")
+    os.makedirs(f"{data_path}/sound/train/Mel", exist_ok=True)
+    shutil.move(mel_train_path, f"{data_path}/sound/train/Mel")
 for mel_val_path in mel_val_data:
-    os.makedirs(f"{data_path}/val/Mel", exist_ok=True)
-    shutil.move(mel_val_path,f"{data_path}/val/Mel")
+    os.makedirs(f"{data_path}/sound/val/Mel", exist_ok=True)
+    shutil.move(mel_val_path,f"{data_path}/sound/val/Mel")
 
 print("complete")

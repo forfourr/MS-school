@@ -25,7 +25,9 @@ class CustomDataset(Dataset):
         if self.transform is not None :
             image = self.transform(image)
 
-        return image ,label
+
+        #img_path 추가해주는 이유 : test에서 어떤 데이터가 맞췄는디 cv2에서 보기위해
+        return image ,label, img_path
     
     def __len__(self):
         return len(self.data_dir)

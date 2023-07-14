@@ -100,8 +100,8 @@ def main():
     ])
 
     ## dataset
-    train_dataset = CustomDataset(f'{data_path}/train',transform=train_transfrom)
-    val_dataset = CustomDataset(f'{data_path}/val',transform=val_transfrom)
+    train_dataset = CustomDataset(f'{data_path}/sound/train',transform=train_transfrom)
+    val_dataset = CustomDataset(f'{data_path}/soound/val',transform=val_transfrom)
     ## dataloader
     train_loader = DataLoader(train_dataset, batch_size=64, num_workers=4, pin_memory=True, shuffle=True)
     val_loader = DataLoader(val_dataset, batch_size=64, num_workers=4, pin_memory=True, shuffle=False)
