@@ -7,7 +7,7 @@ from torch.utils.data import DataLoader
 # 본인이 학습한 모델과 맞는것으로 선택
 # 선생님이 주신 모델은 resnet으로 학습시켰기 때문에 resnet사용
 from torchvision.models import resnet18
-from customdataset_01 import CustomDataset
+from customdataset_01_sound import CustomDataset
 
 import cv2
 
