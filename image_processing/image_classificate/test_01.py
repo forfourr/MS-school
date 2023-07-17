@@ -55,22 +55,22 @@ def main():
             _, pred = torch.max(output, 1)  # 그 중에 가장 높은 값을 가진 라벨
             corr += (pred == target).sum().item()
 
-            # # 무슨 파일을 뭐로 예측했는자 확인
-            # img = cv2.imread(path[0])           # path가 tuple type이기 때문에 path[0] -> str
-            # img = cv2.resize(img,(400,400))
+            # 무슨 파일을 뭐로 예측했는자 확인
+            img = cv2.imread(path[0])           # path가 tuple type이기 때문에 path[0] -> str
+            img = cv2.resize(img,(400,400))
             
-            # pred_label = label_dict[pred.item()]
-            # target_label = label_dict[target.item()]
+            pred_label = label_dict[pred.item()]
+            target_label = label_dict[target.item()]
 
-            # pred_txt = f"pred: {pred_label}"
-            # target_txt = f"target: {target_label}"
-            # img = cv2.rectangle(img, (0,0),(400,80),(255,255,255),-1)
-            # img = cv2.putText(img, pred_txt, (20,20), cv2.FONT_ITALIC, 1,(255,0,5), 2)
-            # img = cv2.putText(img, target_txt, (20,50), cv2.FONT_ITALIC, 1,(0,0,255), 2)
+            pred_txt = f"pred: {pred_label}"
+            target_txt = f"target: {target_label}"
+            img = cv2.rectangle(img, (0,0),(400,80),(255,255,255),-1)
+            img = cv2.putText(img, pred_txt, (20,20), cv2.FONT_ITALIC, 1,(255,0,5), 2)
+            img = cv2.putText(img, target_txt, (20,50), cv2.FONT_ITALIC, 1,(0,0,255), 2)
 
-            # cv2.imshow('test',img)
-            # if cv2.waitKey() ==ord('q'):
-            #     exit()
+            cv2.imshow('test',img)
+            if cv2.waitKey() ==ord('q'):
+                exit()
 
 
 
