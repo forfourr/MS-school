@@ -43,13 +43,13 @@ class Customdataset(Dataset):
         return img, label_idx, img_path
 
     def __len__(self):
-        pass
+        return len(self.data_dir)
 
-#PATH = 'C:/Users/labadmin/MS/MS-school/image_processing/image_classificate/data'
-PATH = 'C:/Users/iiile/Vscode_jupyter/MS_school/MS-school/image_processing/image_classificate/data'
+PATH = 'C:/Users/labadmin/MS/MS-school/image_processing/image_classificate/data'
+#PATH = 'C:/Users/iiile/Vscode_jupyter/MS_school/MS-school/image_processing/image_classificate/data'
 
 if __name__ == '__main__':
     
     test = Customdataset(f"{PATH}/HW_data/train")
-    # for i in test:
-    #     pass
+    for i in test:
+        print(i)

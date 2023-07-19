@@ -14,8 +14,8 @@ from torch.optim import AdamW
 import matplotlib.pyplot as plt
 import os
 
-#PATH = 'C:/Users/labadmin/MS/MS-school/image_processing/image_classificate/data'
-PATH = 'C:/Users/iiile/Vscode_jupyter/MS_school/MS-school/image_processing/image_classificate/data'
+PATH = 'C:/Users/labadmin/MS/MS-school/image_processing/image_classificate/data'
+#PATH = 'C:/Users/iiile/Vscode_jupyter/MS_school/MS-school/image_processing/image_classificate/data'
 
 
 
@@ -30,12 +30,12 @@ def train(model,train_loader, val_loader, epochs, optimizer, criterion, device):
     for epoch in range(epochs):
         train_loss, val_loss = 0.0, 0.0
         train_acc, val_acc = 0.0, 0.0
-        train_loader_iter = tqdm(train_loader, desc=f"Epoch {epoch+1}/{epoch}", leave=False)
+        train_loader_iter = tqdm(train_loader, desc=f"Epoch {epoch+1}", leave=False)
         
         ################# Train #################
         print("Start Train")
         model.train()
-        for i, (data, target) in enumerate(train_loader):
+        for i, (data, target,_) in enumerate(train_loader):
             data, target = data.float().to(device), target.to(device)
 
             optimizer.zero_grad()
@@ -138,8 +138,8 @@ def main():
     train_dataset = Customdataset(f"{PATH}/HW_data/train",
                                   transfrom=train_transform)
     val_dataset = Customdataset(f"{PATH}/HW_data/val",
-                                transfrom=val_transfrom)
-    
+                                    transfrom=val_transfrom)
+
     train_loader = DataLoader(train_dataset, batch_size=64, num_workers=4, shuffle=True)
     val_loadeer = DataLoader(val_dataset, batch_size=64, num_workers=4, shuffle=False)
 

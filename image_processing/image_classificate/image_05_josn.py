@@ -9,8 +9,8 @@ from sklearn.model_selection import train_test_split
 from torchvision.transforms import functional as F
 
 #json경로 가져오기
-#PATH = 'C:/Users/labadmin/MS/MS-school/image_processing/image_classificate/data'
-PATH = 'C:/Users/iiile/Vscode_jupyter/MS_school/MS-school/image_processing/image_classificate/data'
+PATH = 'C:/Users/labadmin/MS/MS-school/image_processing/image_classificate/data'
+#PATH = 'C:/Users/iiile/Vscode_jupyter/MS_school/MS-school/image_processing/image_classificate/data'
 org_folder = f"{PATH}/HW_dataset/images"
 json_path = f'{PATH}/HW_dataset/anno/annotation.json'
 
