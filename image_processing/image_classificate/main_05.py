@@ -136,9 +136,9 @@ def main():
     ])
 
     train_dataset = Customdataset(f"{PATH}/HW_data/train",
-                                  transfrom=train_transform)
+                                  transform=train_transform)
     val_dataset = Customdataset(f"{PATH}/HW_data/val",
-                                    transfrom=val_transfrom)
+                                    transf0rom=val_transfrom)
 
     train_loader = DataLoader(train_dataset, batch_size=64, num_workers=4, shuffle=True)
     val_loadeer = DataLoader(val_dataset, batch_size=64, num_workers=4, shuffle=False)
