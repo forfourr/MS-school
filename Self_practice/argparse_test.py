@@ -11,7 +11,4 @@ parser.add_argument("--age", type=int, default=20)
 args = parser.parse_args()
 
 # 가져오기
-name = args.name
-age = args.age
-
-print(f"My name is {name} and {age} years old")
+print(f"My name is {args.name} and {args.age} years old")
