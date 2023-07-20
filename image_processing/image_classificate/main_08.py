@@ -5,15 +5,13 @@ import torch.nn as nn
 import torchvision
 import pandas as pd
 from torchvision.models.mobilenetv2 import mobilenet_v2
-from torchvision.models.resnet import resnet50
-from torchvision.models.efficientnet import efficientnet_b0
 import albumentations as A
 from albumentations.pytorch import ToTensorV2
 from torch.nn import CrossEntropyLoss
 from tqdm import tqdm
 import torchvision.transforms as transforms
 from torch.utils.data import DataLoader
-from customdataset_08_Hw_food import Customdataset
+from customdataset_06_sport import Customdataset
 import torch.optim as optim
 from torch.optim import AdamW
 import matplotlib.pyplot as plt
@@ -23,76 +21,82 @@ PATH = 'C:/Users/labadmin/MS/MS-school/image_processing/image_classificate/data'
 #PATH = 'C:/Users/iiile/Vscode_jupyter/MS_school/MS-school/image_processing/image_classificate/data'
 
 class Classifier:
-    def __init__(self):
+    def __init__(self, model, optimizer, criterion):
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         self.model = None
+
         self.train_losses = []
         self.val_losses = []
         self.train_accs = []
         self.val_accs = []
 
-
-    def train(self, train_loader, val_loader, epochs, optimizer, criterion, start_epoch=0):
-        best_acc = 0.0
+    def train(self,train_loader, val_loader, epochs, optimizer, criterion, start_epoch):
         
-        ### train
-        print("Start training")
-        for epoch in range(start_epoch, epochs):
-            train_acc =0.0
-            train_loss = 0.0
-            val_acc = 0.0
-            val_loss = 0.0
+        best_val_acc = 0.0
 
+        for epoch in range(start_epoch, epochs):
+            train_loss , train_acc =0.0, 0.0
+            val_loss, val_acc = 0.0, 0.0
+
+            ### train
+            print("start train")
             self.model.train()
             train_loader_iter = tqdm(train_loader, desc=(f"Epoch: {epoch+1}/{epochs}"), leave=False)
-            
+
             for i, (data, label) in enumerate(train_loader_iter):
-                data, label = data.float().to(self.device), label.to(self.device)
+                data , label = data.float().to(self.device), label.to(self.device)
 
                 optimizer.zero_grad()
 
                 output = self.model(data)
+                
                 loss = criterion(output, label)
                 loss.backward()
                 optimizer.step()
-
                 train_loss += loss.item()
 
-                _,pred = torch.max(output, 1)
-                train_acc += (pred == label).sum().item()
+                _, pred = torch.max(output, 1)
+                train_acc += (pred == output).sum().item()
 
-            self.train_losses.append(train_loss/len(train_loader))
-            self.train_accs.append(train_acc/len(train_loader.datast))
+            self.train_losses.append(train_loss/ len(train_loader))
+            self.train_accs.append(val_acc/len(train_loader.dataset))
 
-            print(len(train_loader), len(train_loader.dataset))
-
-            ### eval
-            print("start eval")
+            ### valid
+            print("start valid")
             self.model.eval()
             with torch.no_grad():
                 for data, label in val_loader:
-                    data, label = data.float().to(self.device), label.to(self.device)
+                    data , label = data.float().to(self.device), label.to(self.device)
 
                     output = self.model(data)
 
                     loss = criterion(output, label)
+                    val_loss += loss.item()
+
                     _,pred = torch.max(output, 1)
+                    val_acc += (pred == output).sum().item()
 
-                    val_loss += loss.item
-                    val_acc += (pred == label).sum().item()
-
-            val_acc /= len(val_loader.dataset)
-            self.val_losses.append(val_loss/len(val_loader))
-            self.val_accs.append(val_acc)
+            self.val_losses.append(val_loss/ len(val_loader))
+            self.val_accs.append(val_loss/len(val_loader.dataset))
 
             print(f"Epoch [{epoch + 1} / {epochs}] , Train loss [{train_loss:.4f}],"
                     f"Val loss [{val_loss :.4f}], Train ACC [{train_acc:.4f}],"
                     f"Val ACC [{val_acc:.4f}]")
+            
 
             ### best acc 
             if val_acc > best_acc:
-                torch.save(self.model.state_dict(),
-                           f"{PATH}/07_license_efficient.pt")
+                torch.save({
+                            "epoch": epoch,
+                            "model_state_dict": self.model.state_dict(),
+                            "optimizer_state_dict": self.optimizer.state_dict(),
+                            # 다음에 checkpoint를 이어서 학습하기 위해 필요한 값들
+                            "train_losses": self.train_losses,
+                            "train_accs": self.train_accs,
+                            "val_losses": self.val_losses,
+                            "val_accs": self.val_accs
+                        }, args.checkpoint_path.replace(".pt",
+                                                        "_best.pt"))
                 best_acc = val_acc
 
             ### save model
@@ -104,9 +108,9 @@ class Classifier:
                 'train_losses': self.train_losses,
                 'val_accs': self.val_accs,
                 'val_losses': self.val_losses
-            }, f"{PATH}/weight/07_license_efficient_checkpoint.pt")
+            },  args.checkpoint_path.replace('.pt', f"_{epoch}.pt"))
 
-        torch.save(self.model.state_dict(), f"{PATH}/07_license_efficient.pt")
+        torch.save(self.model.state_dict(), f"{PATH}/08_hw_efficient.pt")
 
 
         self.save_result_to_csv()   # csv저장 함수
@@ -141,12 +145,18 @@ class Classifier:
         plt.legend()
         plt.savefig(f'{PATH}/acc_plot.png')
 
-    def run(self, args):
-        ### 모델 선언
-        self.model = efficientnet_b0(pretrained=True)
-        #Linear(in_features=1280, out_features=1000, bias=True)
-        in_features = self.model.classifier[1]._in_features
-        self.model.classifier[1] = nn.Linear(in_features, 50)
+
+
+
+            
+
+
+
+    def run(self):
+         ### 모델 선언
+        self.model = mobilenet_v2(pretrained=True)
+        in_features = self.model.classifier[1].in_features
+        self.model.classifier[1] = nn.Linear(in_features, 250)
         self.mode.to(self.device)
 
         ### optim, criterion
@@ -190,7 +200,6 @@ class Classifier:
 
 
 
-        
 
 
 if __name__ == '__main__':
@@ -216,7 +225,7 @@ if __name__ == '__main__':
 
 
     args = parser.parse_args()
-        
+
     weight_folder = args.checkpoint_folder_path
     os.makedirs(weight_folder,exist_ok=True)
 
@@ -226,7 +235,3 @@ if __name__ == '__main__':
     classifier = Classifier()
     classifier.run(args)
     
-        
-
-
-

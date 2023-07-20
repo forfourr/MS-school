@@ -18,60 +18,45 @@ class Customdataset(Dataset):
         self.mode = mode
 
         # label dict 생성
-        self.label_dict, self.label_dict2 = self.make_label_dict()
+        self.label_dict = self.make_label_dict()
 
-        # 파일 별로 label 찾기
-        self.math_dict = self.match_label()
 
     def make_label_dict(self):
         labels_dict={}
-        labels_dict2={}
         txt_file_path = f"{PATH}/08_food_HW_data/class_list.txt"
 
         with open(txt_file_path, 'r') as file:
             for idx, line in enumerate(file):
                 label = line.strip().split(' ')[1]  # 줄 바꿈 문자를 제거하여 레이블 추출
                 labels_dict[label] = idx
-                labels_dict2[idx] = label
-                
-        return labels_dict, labels_dict2
+   
+        return labels_dict
     
-    
-    def match_label(self):
-        match_dict = {}
-        csv_path = f"{PATH}/08_food_HW_data/{self.mode}_labels.csv"
-        with open(csv_path, 'r') as f:
-            reader = csv.reader(f)
-            next(reader)    #첫번째 헤더 제외
-            for row in reader:
-                img_name, label = row
-                match_dict[img_name] = int(label)
-        return match_dict
 
     def __getitem__(self, index):
         img_path = self.data_dir[index]
         img = cv2.imread(img_path)
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
-        img_name = os.path.basename(img_path)
-        label = self.math_dict[img_name]
-
-        print(img_name, label, self.label_dict2[label])
+        # label 구하기
+        #img_name = os.path.basename(img_path)
+        label = os.path.basename(os.path.dirname(img_path))
+        label_idx = self.label_dict[label]    
 
         #augmentation
         if self.transform is not None:
             img = self.transform(image = img)['image']
-        return img
+
+        return img, label_idx
 
     def __len__(self):
         return len(self.data_dir)
 
 
-PATH = 'C:/Users/labadmin/MS/MS-school/image_processing/image_classificate/data'
-#PATH = 'C:/Users/iiile/Vscode_jupyter/MS_school/MS-school/image_processing/image_classificate/data'
+#PATH = 'C:/Users/labadmin/MS/MS-school/image_processing/image_classificate/data'
+PATH = 'C:/Users/iiile/Vscode_jupyter/MS_school/MS-school/image_processing/image_classificate/data'
 
 
-if __name__ =="__main__":
-    test = Customdataset(f"{PATH}/08_food_HW_data/train_set", 'train')
-    for i  in test:
-        pass
+# if __name__ =="__main__":
+#     test = Customdataset(f"{PATH}/08_food_HW_data/valid_new", 'valid')
+#     test.make_label_dict()
