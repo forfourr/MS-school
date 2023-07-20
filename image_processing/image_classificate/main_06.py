@@ -83,7 +83,7 @@ class SportClassifier:
                         loss = self.criterion(output,label)
                         _, pred = torch.max(output,1)
 
-                        val_acc += (pred == output).sum().item()
+                        val_acc += (pred == label).sum().item()
                         val_loss += loss.item()
 
                 avg_val_acc = val_acc/len(val_loader.dataset)
@@ -107,7 +107,7 @@ class SportClassifier:
                                                         "_best.pt"))
                     best_val_acc = val_acc
 
-                print(f"Epoch [{epoch + 1} / {self.start_epochs}] , Train loss [{train_loss:.4f}],"
+                print(f"Epoch [{epoch + 1} / {args.epochs}] , Train loss [{train_loss:.4f}],"
                     f"Val loss [{val_loss :.4f}], Train ACC [{train_acc:.4f}],"
                     f"Val ACC [{val_acc:.4f}]")
             

@@ -5,8 +5,8 @@ import pandas as pd
 
 from torch.utils.data import Dataset
     
-#PATH = 'C:/Users/labadmin/MS/MS-school/image_processing/image_classificate/data'
-PATH = 'C:/Users/iiile/Vscode_jupyter/MS_school/MS-school/image_processing/image_classificate/data'
+PATH = 'C:/Users/labadmin/MS/MS-school/image_processing/image_classificate/data'
+#PATH = 'C:/Users/iiile/Vscode_jupyter/MS_school/MS-school/image_processing/image_classificate/data'
 
 
 class Customdataset(Dataset):

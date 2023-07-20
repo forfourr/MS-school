@@ -83,7 +83,7 @@ class Customdataset(Dataset):
         #augmentation
         if self.transform is not None:
             img = self.transform(image = img)['image']
-        return img, label
+        return img, label, img_path
 
     def __len__(self):
         return len(self.data_dir)
@@ -92,8 +92,8 @@ class Customdataset(Dataset):
 PATH = 'C:/Users/labadmin/MS/MS-school/image_processing/image_classificate/data'
 #PATH = 'C:/Users/iiile/Vscode_jupyter/MS_school/MS-school/image_processing/image_classificate/data'
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
     
-    test = Customdataset(f"{PATH}/sport_dataset/train",'test')
-    for i in test:
-        pass
+#     test = Customdataset(f"{PATH}/sport_dataset/train",'valid')
+#     label_dict = test.create_label_dict()
+#     print(label_dict)

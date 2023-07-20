@@ -19,8 +19,8 @@ from torch.optim import AdamW
 import matplotlib.pyplot as plt
 import os
 import argparse
-#PATH = 'C:/Users/labadmin/MS/MS-school/image_processing/image_classificate/data'
-PATH = 'C:/Users/iiile/Vscode_jupyter/MS_school/MS-school/image_processing/image_classificate/data'
+PATH = 'C:/Users/labadmin/MS/MS-school/image_processing/image_classificate/data'
+#PATH = 'C:/Users/iiile/Vscode_jupyter/MS_school/MS-school/image_processing/image_classificate/data'
 
 class Classifier:
     def __init__(self):
