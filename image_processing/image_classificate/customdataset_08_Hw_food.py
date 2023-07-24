@@ -46,17 +46,17 @@ class Customdataset(Dataset):
         #augmentation
         if self.transform is not None:
             img = self.transform(image = img)['image']
-
         return img, label_idx
 
     def __len__(self):
         return len(self.data_dir)
 
 
-#PATH = 'C:/Users/labadmin/MS/MS-school/image_processing/image_classificate/data'
-PATH = 'C:/Users/iiile/Vscode_jupyter/MS_school/MS-school/image_processing/image_classificate/data'
+PATH = 'C:/Users/labadmin/MS/MS-school/image_processing/image_classificate/data'
+#PATH = 'C:/Users/iiile/Vscode_jupyter/MS_school/MS-school/image_processing/image_classificate/data'
 
 
 # if __name__ =="__main__":
 #     test = Customdataset(f"{PATH}/08_food_HW_data/valid_new", 'valid')
-#     test.make_label_dict()
+    
+#     print(test.label_dict)

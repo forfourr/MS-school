@@ -43,10 +43,9 @@ class SportClassifier:
             train_acc = 0.0
             train_loss = 0.0
             self.model.train()
-            train_loader_iter = tqdm(train_loader,
-                                     desc=(f"Epoch: {epoch + 1} / {args.epochs}"),
-                                     leave=False)
-            for i, (data, label) in enumerate(train_loader_iter):
+            train_loader_iter = tqdm(train_loader, desc=(f"Epoch: {epoch+1}/{args.epochs}"), leave=False)
+
+            for i, (data, label,_) in enumerate(train_loader_iter):
                 data = data.float().to(self.device)
                 label = label.to(self.device)
                 output = self.model(data)
