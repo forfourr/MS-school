@@ -3,8 +3,8 @@ import os
 import glob
 import cv2
 
-model = torch.hub.load('ultralytics/yolov5','custon',
-                       path='computervision/Yolo/yolov5-master/runs/exp/weights/best.pt')
+model = torch.hub.load('ultralytics/yolov5','custom',
+                       path='computervision/Yolo/yolov5-master/runs/yolovm5_best.pt')
 
 
 print(model)
