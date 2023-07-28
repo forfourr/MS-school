@@ -11,7 +11,7 @@ from torch.nn import CrossEntropyLoss
 from tqdm import tqdm
 import torchvision.transforms as transforms
 from torch.utils.data import DataLoader
-from customdataset_06_sport import Customdataset
+from customdataset_08_Hw_food import Customdataset
 import torch.optim as optim
 from torch.optim import AdamW
 import matplotlib.pyplot as plt
@@ -21,7 +21,7 @@ PATH = 'C:/Users/labadmin/MS/MS-school/image_processing/image_classificate/data'
 #PATH = 'C:/Users/iiile/Vscode_jupyter/MS_school/MS-school/image_processing/image_classificate/data'
 
 class Classifier:
-    def __init__(self, model, optimizer, criterion):
+    def __init__(self):
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         self.model = None
 
@@ -49,17 +49,19 @@ class Classifier:
                 optimizer.zero_grad()
 
                 output = self.model(data)
-                
                 loss = criterion(output, label)
                 loss.backward()
                 optimizer.step()
                 train_loss += loss.item()
 
                 _, pred = torch.max(output, 1)
-                train_acc += (pred == output).sum().item()
+                train_acc += (pred ==label).sum().item()
 
-            self.train_losses.append(train_loss/ len(train_loader))
-            self.train_accs.append(val_acc/len(train_loader.dataset))
+            train_loss /= len(train_loader)
+            train_acc = train_acc / len(train_loader.dataset)
+
+            self.train_losses.append(train_loss)
+            self.train_accs.append(train_acc)
 
             ### valid
             print("start valid")
@@ -74,10 +76,13 @@ class Classifier:
                     val_loss += loss.item()
 
                     _,pred = torch.max(output, 1)
-                    val_acc += (pred == output).sum().item()
+                    val_acc += (pred == label).sum().item()
 
-            self.val_losses.append(val_loss/ len(val_loader))
-            self.val_accs.append(val_loss/len(val_loader.dataset))
+            val_loss /= len(val_loader)
+            val_acc = val_acc / len(val_loader.dataset)
+
+            self.val_losses.append(val_loss)
+            self.val_accs.append(val_acc)
 
             print(f"Epoch [{epoch + 1} / {epochs}] , Train loss [{train_loss:.4f}],"
                     f"Val loss [{val_loss :.4f}], Train ACC [{train_acc:.4f}],"
@@ -85,11 +90,11 @@ class Classifier:
             
 
             ### best acc 
-            if val_acc > best_acc:
+            if val_acc > best_val_acc:
                 torch.save({
                             "epoch": epoch,
                             "model_state_dict": self.model.state_dict(),
-                            "optimizer_state_dict": self.optimizer.state_dict(),
+                            "optimizer_state_dict":optimizer.state_dict(),
                             # 다음에 checkpoint를 이어서 학습하기 위해 필요한 값들
                             "train_losses": self.train_losses,
                             "train_accs": self.train_accs,
@@ -97,7 +102,7 @@ class Classifier:
                             "val_accs": self.val_accs
                         }, args.checkpoint_path.replace(".pt",
                                                         "_best.pt"))
-                best_acc = val_acc
+                best_val_acc = val_acc
 
             ### save model
             torch.save({
@@ -110,7 +115,7 @@ class Classifier:
                 'val_losses': self.val_losses
             },  args.checkpoint_path.replace('.pt', f"_{epoch}.pt"))
 
-        torch.save(self.model.state_dict(), f"{PATH}/08_hw_efficient.pt")
+        #torch.save(self.model.state_dict(), f"{PATH}/08_hw_efficient.pt")
 
 
         self.save_result_to_csv()   # csv저장 함수
@@ -152,12 +157,12 @@ class Classifier:
 
 
 
-    def run(self):
+    def run(self,args):
          ### 모델 선언
         self.model = mobilenet_v2(pretrained=True)
         in_features = self.model.classifier[1].in_features
-        self.model.classifier[1] = nn.Linear(in_features, 250)
-        self.mode.to(self.device)
+        self.model.classifier[1] = nn.Linear(in_features, 251)
+        self.model.to(self.device)
 
         ### optim, criterion
         optimizer = AdamW(self.model.parameters(), lr = args.lr, weight_decay=args.weight_decay)
@@ -175,8 +180,8 @@ class Classifier:
             ToTensorV2()
         ])
 
-        train_dataset = Customdataset(args.train_dir, transfrom=train_transforms)
-        val_dataset = Customdataset(args.val_dir,transfrom=val_transforms)
+        train_dataset = Customdataset(args.train_dir, 'train',transform=train_transforms)
+        val_dataset = Customdataset(args.val_dir,'valid',transform=val_transforms)
 
         train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True)
         val_loader = DataLoader(val_dataset, batch_size=args.batch_size, shuffle=False)
@@ -206,8 +211,8 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
     # path
-    parser.add_argument("--train_dir", type=str, default=f"{PATH}/license_dataset/train")
-    parser.add_argument("--val_dir", type=str, default=f"{PATH}/license_dataset/valid")
+    parser.add_argument("--train_dir", type=str, default=f"{PATH}/08_food_HW_data/train_new")
+    parser.add_argument("--val_dir", type=str, default=f"{PATH}/08_food_HW_data/valid_new")
     parser.add_argument("--checkpoint_folder_path", type=str,
                         default=f"{PATH}/weight")
 
@@ -220,7 +225,7 @@ if __name__ == '__main__':
 
     parser.add_argument("--resume_training", action='store_true')   #명령을 주면 true,아니면 false
     parser.add_argument("--checkpoint_path", type=str,
-                        default=f"{PATH}/weight/07_efficient_checkpoint.pt")
+                        default=f"{PATH}/weight/08_HW_efficient_checkpoint.pt")
 
 
 
@@ -231,6 +236,7 @@ if __name__ == '__main__':
 
     train_dir = args.train_dir
     val_dir = args.val_dir
+   
 
     classifier = Classifier()
     classifier.run(args)

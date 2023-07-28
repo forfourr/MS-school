@@ -7,8 +7,8 @@ from PIL import Image
 from torch.utils.data import Dataset
 from torchvision.transforms import functional as F
 
-#PATH = 'C:/Users/labadmin/MS/MS-school/image_processing/image_classificate/data'
-PATH = 'C:/Users/iiile/Vscode_jupyter/MS_school/MS-school/image_processing/image_classificate/data'
+PATH = 'C:/Users/labadmin/MS/MS-school/image_processing/image_classificate/data'
+#PATH = 'C:/Users/iiile/Vscode_jupyter/MS_school/MS-school/image_processing/image_classificate/data'
 
 
 
@@ -75,5 +75,5 @@ def main(mode):
 
 
 if __name__ == '__main__':
-    main('train')
-    #main('valid')
+    #main('train')
+    main('valid')

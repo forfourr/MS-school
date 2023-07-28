@@ -3,6 +3,10 @@ image_processing/image_classificate/data/
 
 computervision/data/
 
+<<<<<<< HEAD
 computervision/Yolo/car_load_dataset
 
 computervision\Yolo\yolov5-master
+=======
+computervision/Yolo/car_load_dataset
+>>>>>>> summer
