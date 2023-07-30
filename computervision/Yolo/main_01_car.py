@@ -13,7 +13,9 @@ from albumentations.pytorch.transforms import ToTensorV2
 from tqdm.auto import tqdm
 from customdataset_01_car import Customdataset, collate_fn
 from config_01 import config
+print(config['IMG_SIZE'])
 
+exit()
 def main():
     device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
     
@@ -30,15 +32,15 @@ def main():
     # fix seed
     seed_everything(config['SEED'])
 
-    ### augmentation ###
+    ### augmentation transfrom ###
+    # train
     def get_train_transforms():
         return A.Compose([
             A.Resize(config['IMG_SIZE'], config['IMG_SIZE']),    # IMG_SIZE=512
             ToTensorV2()
         ], bbox_params=A.BboxParams(format='pascal_voc', label_fields=['labels']))    # aug를 줘도 bbox에 영향 x
 
-
-    ### transfrom ###
+    # test
     def get_test_transforms():
         return A.Compose([
             A.Resize(config['IMG_SIZE'], config['IMG_SIZE']),    # IMG_SIZE=512
