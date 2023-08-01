@@ -1,7 +1,7 @@
-
 # image process data 파일 무시
 image_processing/image_classificate/data/
 
+<<<<<<< HEAD
 computervision/Yolo/car_load_dataset
 computervision/Yolo/yolov5-master
 
