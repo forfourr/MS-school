@@ -5,3 +5,9 @@ image_processing/image_classificate/data/
 computervision/data/
 
 computervision/Yolo/car_load_dataset
+
+computervision/sementation/data
+computervision/sementation/weights
+computervision/sementation/__pycache__
+
+computervision/keypointRCNN/keypoint_dataset
