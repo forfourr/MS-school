@@ -6,7 +6,7 @@ computervision/Yolo/yolov5-master
 
 
 computervision/Yolo/car_load_dataset
-mputervision/sementation/data
+computervision/sementation/data
 computervision/sementation/weights
 computervision/sementation/__pycache__
 
