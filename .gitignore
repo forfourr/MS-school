@@ -5,8 +5,17 @@ image_processing/image_classificate/data/
 computervision/Yolo/car_load_dataset
 computervision/Yolo/yolov5-master
 
+<<<<<<< HEAD
+=======
+computervision/Yolo/car_load_dataset
+
+>>>>>>> summer
 computervision/sementation/data
 computervision/sementation/weights
 computervision/sementation/__pycache__
 
+<<<<<<< HEAD
 computervision/keypointRCNN/keypoint_dataset
+=======
+computervision/keypointRCNN/keypoint_dataset
+>>>>>>> summer

@@ -7,8 +7,21 @@ import csv
 import torch
 from torch.utils.data import Dataset
 
+
+'''
+differnet shape or type (image, bounding boxes) -> collate function
+DataLoader 의 역할을 해준다.
+'''
+
 def collate_fn(batch):
+    '''
+    batch = [
+        (image, box, label),
+        (....)
+    ]
+    '''
     images, targets_boxes, targets_labels = tuple(zip(*batch))
+    print(f"zip*batch: {zip(*batch)},\n tuple:{tuple(zip(*batch))} ")
 
     # img list -> torch.stack
     # 여러 개의 텐서를 하나의 새로운 텐서로 결합
@@ -88,7 +101,7 @@ class Customdataset(Dataset):
     def __len__(self):
         return len(self.img_path)
 
-if __name__ == '__main__':
-    test = Customdataset('computervision/Yolo/car_load_dataset/train', train=True, transforms=None)
-    for i in test:
-        print(i)
+# if __name__ == '__main__':
+#     test = Customdataset('computervision/data/car_load_dataset/train', train=True, transforms=None)
+#     for i in test:
+#         print(i)
