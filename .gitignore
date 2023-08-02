@@ -1,11 +1,8 @@
 # image process data 파일 무시
 image_processing/image_classificate/data/
 
-computervision/Yolo/car_load_dataset
-computervision/Yolo/yolov5-master
+computervision/data
 
-
-computervision/Yolo/car_load_dataset
 computervision/sementation/data
 computervision/sementation/weights
 computervision/sementation/__pycache__
@@ -13,16 +10,10 @@ computervision/sementation/__pycache__
 
 computervision/keypointRCNN/keypoint_dataset
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+computervision/Yolo/car_load_dataset
+computervision\Yolo\yolov5-master
 computervision/Yolo/car_load_dataset
 
-computervision\Yolo\yolov5-master
-=======
-computervision/Yolo/car_load_dataset
->>>>>>> summer
 
 
 Self_practice/faster-RCNN/Uno_cards_dataset
-=======
->>>>>>> 2d5d99b9e397039fcfbf0ba88f7e6c537641a3e9
