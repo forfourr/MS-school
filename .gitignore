@@ -1,7 +1,15 @@
-
 # image process data 파일 무시
 image_processing/image_classificate/data/
 
 computervision/data/
 
+<<<<<<< HEAD
 computervision/Yolo/car_load_dataset
+
+computervision\Yolo\yolov5-master
+=======
+computervision/Yolo/car_load_dataset
+>>>>>>> summer
+
+
+Self_practice/faster-RCNN/Uno_cards_dataset
