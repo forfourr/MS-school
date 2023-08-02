@@ -12,4 +12,5 @@ computervision/sementation/__pycache__
 
 
 computervision/keypointRCNN/keypoint_dataset
+computervision/data
 
