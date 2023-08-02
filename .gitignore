@@ -1,36 +1,15 @@
 # image process data 파일 무시
 image_processing/image_classificate/data/
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+computervision/data
+
 computervision/Yolo/car_load_dataset
 computervision/Yolo/yolov5-master
-=======
 computervision/Yolo/car_load_dataset
-computervision/Yolo/yolov5-master
 
->>>>>>> origin/summer
 
-<<<<<<< HEAD
-=======
-computervision/Yolo/car_load_dataset
-<<<<<<< HEAD
-
->>>>>>> summer
-=======
->>>>>>> origin/summer
 computervision/sementation/data
 computervision/sementation/weights
 computervision/sementation/__pycache__
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 computervision/keypointRCNN/keypoint_dataset
-=======
-computervision/keypointRCNN/keypoint_dataset
->>>>>>> summer
-=======
-
-computervision/keypointRCNN/keypoint_dataset
-
->>>>>>> origin/summer
