@@ -3,13 +3,29 @@ image_processing/image_classificate/data/
 
 computervision/data
 
+<<<<<<< HEAD
 computervision/Yolo/car_load_dataset
 computervision/Yolo/yolov5-master
 computervision/Yolo/car_load_dataset
 
 
+=======
+>>>>>>> origin/summer
 computervision/sementation/data
 computervision/sementation/weights
 computervision/sementation/__pycache__
 
+<<<<<<< HEAD
 computervision/keypointRCNN/keypoint_dataset
+=======
+
+computervision/keypointRCNN/keypoint_dataset
+
+computervision/Yolo/car_load_dataset
+computervision\Yolo\yolov5-master
+computervision/Yolo/car_load_dataset
+
+
+
+Self_practice/faster-RCNN/Uno_cards_dataset
+>>>>>>> origin/summer
