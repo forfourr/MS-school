@@ -39,7 +39,7 @@ def coco_to_yolo(coco_path, yolo_path,img_path, target_size):
 
         img = Image.open(image_path)
 
-        yoylo_data =[]
+        yolo_data =[]
         annotations = [anno for anno in coco_data['annotations'] if anno['image_id'] == image_id]
         # anno
         for anno in annotations:
@@ -65,7 +65,7 @@ def coco_to_yolo(coco_path, yolo_path,img_path, target_size):
         }
 
         # Create a JSON file for each image
-        json_file_path = os.path.join(yolo_path, f"{os.path.splitext(file_name)[0]}.json")
+        json_file_path = os.path.join(yolo_path, f"{os.path.splitext(file_name)[0]}.txt")
         with open(json_file_path, 'w') as json_file:
             json.dump(yolo_json_data, json_file, indent=4)
 
@@ -76,8 +76,8 @@ def coco_to_yolo(coco_path, yolo_path,img_path, target_size):
 
 if __name__ == '__main__':
     coco_path = 'computervision/data/website_dataset/valid/_annotations.coco.json'
-    yolo_path = 'computervision/data/website_dataset/valid/anno'
-    img_path = 'computervision/data/website_dataset/valid/images'
+    yolo_path = 'computervision/data/website_dataset/labels/valid'
+    img_path = 'computervision/data/website_dataset/images/valid'
     os.makedirs(yolo_path, exist_ok=True)
     os.makedirs(img_path, exist_ok=True)
     coco_to_yolo(coco_path, yolo_path, img_path, target_size=(416,416))

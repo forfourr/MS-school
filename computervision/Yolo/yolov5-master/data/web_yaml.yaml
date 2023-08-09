@@ -1,6 +1,6 @@
-train: computervision/data/website_dataset/train/images
-val: computervision/data/website_dataset/valid/images
-test: computervision/data/website_dataset/test/images
+train: C:/Users/labadmin/MS/MS-school/computervision/data/website_dataset/train/images
+val: C:/Users/labadmin/MS/MS-school/computervision/data/website_dataset/valid/images
+test: C:/Users/labadmin/MS/MS-school/computervision/data/website_dataset/test/images
 
 #class
 names:
