@@ -12,7 +12,7 @@ computervision/sementation/__pycache__
 computervision/keypointRCNN/keypoint_dataset
 
 computervision/Yolo/car_load_dataset
-computervision\Yolo\yolov5-master
+computervision/Yolo/yolov5-master
 computervision/Yolo/car_load_dataset
 
 
@@ -25,4 +25,4 @@ computervision/yolov8/ultralytics-main/tracking_test_video.mp4
 computervision/yolov8/ultralytics-main/tracking_test_video.webm
 >>>>>>> summer
 
-GAN\data
+GAN/data

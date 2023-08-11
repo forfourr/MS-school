@@ -20,4 +20,4 @@ transforms = transforms.Compose([
 
 # dataset
 train_dataset = torchvision.datasets.MNIST(root='GAN/data', train=True, transform=transforms, download=True)
-train_loader = torch.utils.data.DataLoader(dataset = train_dataset, batch_size = BATCH_SIZE, shuffles=True )
+train_loader = torch.utils.data.DataLoader(dataset = train_dataset, batch_size = BATCH_SIZE, shuffle=True )
