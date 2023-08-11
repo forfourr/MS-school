@@ -1,0 +1,90 @@
+absl-py==1.4.0
+albumentations==1.3.0
+altgraph==0.17.3
+brotlipy==0.7.0
+cachetools==5.3.1
+certifi @ file:///C:/b/abs_4a0polqwty/croot/certifi_1683875377622/work/certifi
+cffi @ file:///C:/ci_311/cffi_1676423759166/work
+charset-normalizer @ file:///tmp/build/80754af9/charset-normalizer_1630003229654/work
+colorama==0.4.6
+contourpy==1.1.0
+cryptography @ file:///C:/b/abs_b28tzldafl/croot/cryptography_1686613103834/work
+cycler==0.11.0
+Cython==3.0.0
+filelock @ file:///C:/ci_311/filelock_1676427284139/work
+fonttools==4.40.0
+gitdb==4.0.10
+GitPython==3.1.32
+google-auth==2.21.0
+google-auth-oauthlib==1.0.0
+grpcio==1.56.0
+idna @ file:///C:/ci_311/idna_1676424932545/work
+imageio==2.31.1
+Jinja2 @ file:///C:/ci_311/jinja2_1676424968965/work
+joblib==1.3.1
+kiwisolver==1.4.4
+lapx==0.5.4
+lazy_loader==0.3
+Markdown==3.4.3
+MarkupSafe @ file:///C:/ci_311/markupsafe_1676424152318/work
+matplotlib==3.7.2
+mkl-fft==1.3.6
+mkl-random @ file:///C:/Users/dev-admin/mkl/mkl_random_1682977971003/work
+mkl-service==2.4.0
+mpmath==1.2.1
+networkx @ file:///C:/b/abs_b935xy_9g6/croot/networkx_1678964342510/work
+numpy @ file:///C:/b/abs_5akk51tu0f/croot/numpy_and_numpy_base_1687466253743/work
+oauthlib==3.2.2
+opencv-python==4.8.0.74
+opencv-python-headless==4.8.0.74
+packaging==23.1
+pandas==2.0.3
+pefile==2023.2.7
+Pillow==9.4.0
+protobuf==4.23.4
+psutil==5.9.5
+pyasn1==0.5.0
+pyasn1-modules==0.3.0
+pycocotools==2.0.6
+pycparser @ file:///tmp/build/80754af9/pycparser_1636541352034/work
+pyinstaller==5.13.0
+pyinstaller-hooks-contrib==2023.5
+pyOpenSSL @ file:///C:/b/abs_de215ipd18/croot/pyopenssl_1678965319166/work
+pyparsing==3.0.9
+PySide6==6.5.1.1
+PySide6-Addons==6.5.1.1
+PySide6-Essentials==6.5.1.1
+PySocks @ file:///C:/ci_311/pysocks_1676425991111/work
+python-dateutil==2.8.2
+pytz==2023.3
+PyWavelets==1.4.1
+pywin32-ctypes==0.2.2
+PyYAML==6.0
+qudida==0.0.4
+requests @ file:///C:/b/abs_41owkd5ymz/croot/requests_1682607524657/work
+requests-oauthlib==1.3.1
+rsa==4.9
+scikit-image==0.21.0
+scikit-learn==1.3.0
+scipy==1.11.1
+seaborn==0.12.2
+shiboken6==6.5.1.1
+six==1.16.0
+smmap==5.0.0
+sympy @ file:///C:/ci_311_rebuilds/sympy_1679009400182/work
+tensorboard==2.13.0
+tensorboard-data-server==0.7.1
+thop==0.1.1.post2209072238
+threadpoolctl==3.1.0
+tifffile==2023.7.10
+torch==2.0.1
+torchaudio==2.0.2
+torchvision==0.15.2
+tqdm==4.65.0
+typing_extensions @ file:///C:/b/abs_5em9ekwz24/croot/typing_extensions_1686602003259/work
+tzdata==2023.3
+ultralytics==8.0.141
+urllib3 @ file:///C:/b/abs_889_loyqv4/croot/urllib3_1686163174463/work
+utils==1.0.1
+Werkzeug==2.3.6
+win-inet-pton @ file:///C:/ci_311/win_inet_pton_1676425458225/work
